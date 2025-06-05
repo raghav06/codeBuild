@@ -1,0 +1,19 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo "Updating AWS CLI..."
+      - pip install --upgrade awscli
+  build:
+    commands:
+      - echo "Uploading CloudFormation template to S3..."
+      - aws s3 ls s3://cf-templates-z5q3ztki8ohd-us-west-2/ || echo "Bucket check failed!"
+      - aws s3 cp create-vpc.yml s3://cf-templates-z5q3ztki8ohd-us-west-2/
+artifacts:
+  files:
+    - create-vpc.yml
+cache:
+  paths:
+    - '/root/.cache/pip/**/*'
