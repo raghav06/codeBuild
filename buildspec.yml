@@ -1,15 +1,13 @@
 version: 0.2
+
 phases:
-  install:
+  pre_build:
     commands:
-      - echo "Installing AWS CLI..."
-      - pip install --upgrade awscli
+      - echo "Checking for create-vpc.yml"
+      - pwd
+      - ls -al
+      - find . -name 'create-vpc.yml'
   build:
     commands:
-      - echo "Uploading CloudFormation template..."
-      - aws sts get-caller-identity  # Verify credentials
+      - echo "Uploading to S3"
       - aws s3 cp create-vpc.yml s3://cf-templates-z5q3ztki8ohd-us-west-2/
-      
-artifacts:
-  files:
-    - create-vpc.yml
