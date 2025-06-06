@@ -1,8 +1,11 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Description: My Sample VPC
+version: 0.2
 
-Resources:
-  MyVPC:
-    Type: AWS::EC2::VPC
-    Properties:
-      CidrBlock: 10.0.0.0/16
+phases:
+  pre_build:
+    commands:
+      - echo "Checking if file exists"
+      - ls -al
+  build:
+    commands:
+      - echo "Uploading create-vpc.yml to S3"
+      - aws s3 cp create-vpc.yml s3://YOUR-BUCKET-NAME/
