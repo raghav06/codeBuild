@@ -8,8 +8,8 @@ phases:
     commands:
       - echo "Uploading CloudFormation template..."
       - aws sts get-caller-identity  # Verify credentials
-      - aws s3 ls s3://cf-templates-z5q3ztki8ohd-us-west-2/ || aws s3 mb s3://cf-templates-z5q3ztki8ohd-us-west-2 --region us-west-2
       - aws s3 cp create-vpc.yml s3://cf-templates-z5q3ztki8ohd-us-west-2/
+      
 artifacts:
   files:
     - create-vpc.yml
