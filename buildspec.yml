@@ -8,4 +8,4 @@ phases:
   build:
     commands:
       - echo "Uploading create-vpc.yml to S3"
-      - aws s3 cp create-vpc.yml s3://tulips/
+      - aws s3 cp create-vpc.yml s3://tulipsitc/
