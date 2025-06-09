@@ -1,11 +1,13 @@
 version: 0.2
-
 phases:
-  pre_build:
+  install:
     commands:
-      - echo "Checking if file exists"
-      - ls -al
+      - echo Installing AWS CLI
+      - yum install -y aws-cli
   build:
     commands:
-      - echo "Uploading create-vpc.yml to S3"
-      - aws s3 cp create-vpc.yml s3://tulipsitc/
+      - echo Uploading CloudFormation template to S3.........
+      - aws s3 cp create-vpc.yml s3://cf-templates-z5q3ztki8ohd-us-west-2/
+artifacts:
+  files:
+    - create-vpc.yml
