@@ -1,13 +1,29 @@
 version: 0.2
+
 phases:
   install:
+    runtime-versions:
+      python: 3.11
     commands:
-      - echo Installing AWS CLI
-      - yum install -y aws-cli
+      - echo "Installing dependencies..."
+      - apt-get update -y || yum update -y || true
+      - which aws
+      - aws --version
+
+  pre_build:
+    commands:
+      - echo "Pre-build phase started..."
+      - echo "Listing current directory:"
+      - ls -la
+      - echo "Checking if create-vpc.yml exists:"
+      - cat create-vpc.yml || echo "File not found"
+
   build:
     commands:
-      - echo Uploading CloudFormation template to S3.........
-      - aws s3 cp create-vpc.yml s3://cf-templates-z5q3ztki8ohd-us-west-2/
+      - echo "Build phase started..."
+      - echo "Uploading create-vpc.yml to S3..."
+      - aws s3 cp create-vpc.yml s3://cf-templates-z5q3ztki8ohd-us-west-2/ --region us-west-2
+
 artifacts:
   files:
     - create-vpc.yml
